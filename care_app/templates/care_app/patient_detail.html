@@ -16,8 +16,8 @@
 
     <a href="{% url 'patient-update' patient.id %}" class="btn btn-primary">Update Information</a>
 
-    <form method="post" style="display: inline;">
-        {% csrf_token %}
-        <button type="submit" class="btn btn-danger">Delete</button>
-    </form>
+    <form method="post" action="{% url 'patient-delete' patient.id %}" style="display: inline;" onsubmit="return confirm('Are you sure you want to delete {{ patient.name }} from the care app?');">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">Delete</button>
+</form>
 {% endblock %}

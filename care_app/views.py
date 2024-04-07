@@ -1,6 +1,6 @@
 # from msilib.schema import ListView
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
+from django.http import HttpResponseRedirect
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from care_app.models import Patient
@@ -51,3 +51,7 @@ class PatientDeleteView(DeleteView):
     success_url = reverse_lazy('index')  # Redirect to the home page after deletion
     template_name = 'care_app/patient_confirm_delete.html'  # The template for the confirmation page
 
+    def delete(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        self.object.delete()
+        return redirect(self.get_success_url())

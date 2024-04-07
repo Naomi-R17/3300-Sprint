@@ -15,7 +15,7 @@ urlpatterns = [
     path('patient/<int:pk>/', PatientDetailView.as_view(), name='patient-detail'),
     path('patient/create/', PatientCreateView.as_view(), name='patient-create'),
     path('patient/<int:pk>/update/', PatientUpdateView.as_view(), name='patient-update'),
-    path('patient/<int:pk>/delete/', PatientDeleteView.as_view(), name='patient-delete'),
+    path('patient/<int:pk>/delete/', views.PatientDeleteView.as_view(), name='patient-delete'),
 ]
 
 if settings.DEBUG:
