@@ -4,7 +4,11 @@
 {% block content %}
     <h1>{{ patient.name }}'s Details</h1>
     <div>
-        <img src="{{ patient.profile_picture.url }}" alt="{{ patient.name }}'s Profile Picture" style="max-width: 200px; max-height: 200px;">
+        {% if patient.profile_picture %}
+            <img src="{{ patient.profile_picture.url }}" alt="{{ patient.name }}'s Profile Picture" style="max-width: 200px; max-height: 200px;">
+        {% else %}
+            <p>No profile picture available.</p>
+        {% endif %}
     </div>
     <p><strong>Email:</strong> {{ patient.email }}</p>
     <p><strong>Phone:</strong> {{ patient.phone }}</p>
