@@ -1,0 +1,21 @@
+{% extends "care_app/base_template.html" %}
+
+{% block content %}
+<div class="container">
+    <h1>Care App Patients</h1>
+    <h3>Active Patients</h3>
+    {% if patients %}
+    <ul>
+        {% for patient in patients %}
+            <li style ="padding-bottom:10px;">
+                <strong>{{ patient.name }}'s Profile:</strong>
+                <a href="{% url 'patient-detail' patient.id %}" class="btn btn-primary">View Patient</a>
+            </li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <p>No active patients found.</p>
+    {% endif %}
+    <a href="{% url 'patient-create' %}" class="btn btn-success">Create Patient</a>
+</div>
+{% endblock %}

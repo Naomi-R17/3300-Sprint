@@ -1,0 +1,13 @@
+<!-- care_app/templates/care_app/patient_confirm_delete.html -->
+{% extends "care_app/base_template.html" %}
+
+{% block content %}
+<h1>Confirm Deletion</h1>
+<p>Are you sure you want to delete "{{ object }}" from the care app?</p>
+
+<form method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">Confirm Delete</button>
+    <a href="{% url 'index' %}" class="btn btn-secondary">Cancel</a>
+</form>
+{% endblock %}

@@ -1,0 +1,11 @@
+<!-- care_app/templates/care_app/update_patient.html -->
+{% extends "care_app/base_template.html" %}
+
+{% block content %}
+<h1>Update Patient Information</h1>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Update Information</button>
+</form>
+{% endblock %}

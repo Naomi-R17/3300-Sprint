@@ -1,0 +1,19 @@
+<!-- care_app/templates/care_app/patient_detail.html -->
+{% extends "care_app/base_template.html" %}
+
+{% block content %}
+    <h1>{{ patient.name }}'s Details</h1>
+    <div>
+        <img src="{{ patient.profile_picture.url }}" alt="{{ patient.name }}'s Profile Picture" style="max-width: 200px; max-height: 200px;">
+    </div>
+    <p><strong>Email:</strong> {{ patient.email }}</p>
+    <p><strong>Phone:</strong> {{ patient.phone }}</p>
+    <p><strong>Date of Birth:</strong> {{ patient.dob }}</p>
+
+    <a href="{% url 'patient-update' patient.id %}" class="btn btn-primary">Update Information</a>
+
+    <form method="post" style="display: inline;">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Delete</button>
+    </form>
+{% endblock %}
