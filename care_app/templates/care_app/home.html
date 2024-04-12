@@ -1,9 +1,13 @@
 {% extends "care_app/base_template.html" %}
 
+{% load static %}
+
 {% block content %}
 <div class="container">
-    <h1>Care App Patients</h1>
-    <h3>Active Patients</h3>
+    <!-- Logo -->
+    <div class="container-fluid d-flex justify-content-center align-items-center" style="height: 50vh; padding: 0px;">
+        <img src="{% static 'images/Care-A-Lot Logo.png' %}" class="img-fluid" alt="Centered image" style="max-width: 300px; margin-left: 210px;">
+    </div>
     {% if patients %}
     <ul>
         {% for patient in patients %}
