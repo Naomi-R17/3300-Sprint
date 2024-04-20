@@ -9,17 +9,36 @@
         <img src="{% static 'images/Care-A-Lot Logo.png' %}" class="img-fluid" alt="Centered image" style="max-width: 300px; margin-left: 210px;">
     </div>
     {% if patients %}
-    <ul>
+    <div class="row justify-content-center">
         {% for patient in patients %}
-            <li style ="padding-bottom:10px;">
-                <strong>{{ patient.name }}'s Profile:</strong>
-                <a href="{% url 'patient-detail' patient.id %}" class="btn btn-primary">View Patient</a>
-            </li>
+        <div class="col-md-3 text-center">
+            <div style="margin-bottom: 20px; margin-left:60px;">
+                {% if patient.profile_picture %}
+                <a href="{% url 'patient-detail' patient.id %}">
+                    <img src="{{ patient.profile_picture.url }}" alt="{{ patient.name }}'s Profile Picture" class="img-thumbnail rounded-circle with-shadow"
+                         style="width: 150px; height: 150px; object-fit: cover; border: 5px solid #A2A6F2;">
+                </a>
+                {% else %}
+                <a href="{% url 'patient-detail' patient.id %}">
+                    <div class="initials-avatar" style="width: 145px; height: 145px; line-height: 145px; border-radius: 50%; background-color: #A2A6F2; color: #EEF0FF; font-size: 70px; font-weight: bold; box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);">{{ patient.name|slice:"1"|upper }}</div>
+                </a>
+                {% endif %}
+                <p style="font-family: 'Monaco', monospace; margin-top: 10px;">{{ patient.name }}</p>
+            </div>
+        </div>
         {% endfor %}
-    </ul>
+    </div>
     {% else %}
     <p>No active patients found.</p>
     {% endif %}
-    <a href="{% url 'patient-create' %}" class="btn btn-success">Create Patient</a>
+    <a href="{% url 'patient-create' %}" class="btn btn-outline-dark" style="position: absolute; top: 100px; right: 40px;"><i class="bi bi-plus-lg"></i> </a>
 </div>
+
+<!-- Add CSS styles here -->
+    <style>
+        .with-shadow {
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        }
+    </style>
+
 {% endblock %}

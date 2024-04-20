@@ -6,6 +6,9 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from care_app.models import Patient
 from django.urls import reverse_lazy
 from .forms import PatientForm
+from functools import wraps
+from django.http import HttpResponseForbidden
+from .models import *
 
 
 # Create your views here.
@@ -55,3 +58,9 @@ class PatientDeleteView(DeleteView):
         self.object = self.get_object()
         self.object.delete()
         return redirect(self.get_success_url())
+
+
+# Role based access control
+# def getUserRole(user):
+#     user_role = UserRole.objects.get(user__id = self.id)
+

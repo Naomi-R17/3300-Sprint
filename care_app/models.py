@@ -1,6 +1,6 @@
+from django.contrib.auth.models import User, AbstractBaseUser, BaseUserManager, PermissionsMixin
 from django.db import models
 from django.urls import reverse
-
 
 
 # Create your models here.
@@ -17,6 +17,10 @@ class Patient(models.Model):
 
     def get_absolute_url(self):
         return reverse('patient-detail', args=[str(self.id)])
+
+    # Gets the Patient's initial's in in case they don't upload a pfp
+    def initials(self):
+        return ''.join([name[0].upper() for name in self.name.split()])
 
 
 # Medication list
@@ -91,3 +95,28 @@ class Medication(models.Model):
         return f"{self.patient.name}'s {self.name}"
 
 
+# Role Based Access Control
+# class registeredUser(AbstractUser):
+#     phoneNumber = models.CharField("Phone Number", max_length=15, blank=False)
+#     profilePicture = models.ImageField("Profile Picture", upload_to='profile_pics/', blank=True, null=True)
+#
+#     def __str__(self):
+#         return self.username
+
+# class Module(models.Model):
+#     name = models.CharField(max_length=50)
+#
+#
+# class Permission(models.Model):
+#     name = models.CharField(max_length=50)
+#     module = models.ForeignKey(Module, on_delete=models.CASCADE)
+#
+#
+# class Role(models.Model):
+#     name = models.CharField(max_length=50)
+#     permissions = models.ManyToManyField(Permission)
+#
+#
+# class UserRole(models.Model):
+#     user = models.ForeignKey(User, on_delete=models.CASCADE)
+#     role = models.ForeignKey(Role, on_delete=models.SET_NULL, null=True)
