@@ -19,8 +19,8 @@
 
 
 		 <!-- Navbar-->
-		 <nav class="navbar navbar-expand-lg bg-body-tertiary">
-			 <img src="{% static 'images/Screenshot2024.png' %}" style="width: 70px; height: 70px;">
+		 <nav class="navbar navbar-expand-lg custom-navbar ">
+			 <img src="{% static 'images/smallLogo.png' %}" style="width: 70px; height: 70px;">
 
 		   <div class="container-fluid">
 			 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -29,9 +29,8 @@
 			 <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
 			   <div class="navbar-nav">
 				 <!--  {% url 'index' %}  is defined in url path to dynamically create url -->
-				 <a class="nav-link active" aria-current="page" href="{% url 'index' %}">Home</a>  
-				 <a class="nav-link" href="#">Menu 2</a>  
-				 <a class="nav-link" href="#">Menu 3</a>
+				 <a class="nav-link active" aria-current="page" href="{% url 'index' %}"><i class="bi bi-house-door"></i> Home</a>
+				 <a class="nav-link" href="#"><i class="bi bi-person-circle"></i> My Profile</a>
 				 {% if user.is_authenticated %}
 				   <a class="nav-link" href="{% url 'logout' %}?next={{ request.path }}">Logout {{user}}</a>
 				 {% else %}
