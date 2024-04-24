@@ -5,10 +5,11 @@ from django.views.generic import ListView, DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from care_app.models import Patient
 from django.urls import reverse_lazy
-from .forms import PatientForm
+from .forms import PatientForm, UserRegisterForm
 from functools import wraps
 from django.http import HttpResponseForbidden
 from .models import *
+from django.contrib.auth import authenticate, login, logout
 
 
 # Create your views here.
@@ -59,8 +60,38 @@ class PatientDeleteView(DeleteView):
         self.object.delete()
         return redirect(self.get_success_url())
 
+def medication_list(request, patient_id):
+    patient = Patient.objects.get(pk=patient_id)
+    medications = Medication.objects.filter(patient=patient)
+    return render(request, 'care_app/medication_list.html', {'patient': patient, 'medications': medications})
 
 # Role based access control
 # def getUserRole(user):
 #     user_role = UserRole.objects.get(user__id = self.id)
+def register(request):
+    if request.method == 'POST':
+        form = UserRegisterForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('login')
+    else:
+        form = UserRegisterForm()
+    return render(request, 'care_app/register.html', {'form': form})
+
+def login_view(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return redirect('index')
+        else:
+            # Handle invalid login
+            pass
+    return render(request, 'registration/login.html')
+
+def logout_view(request):
+    logout(request)
+    return redirect('index')
 

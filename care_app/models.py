@@ -84,8 +84,8 @@ class Medication(models.Model):
     name = models.CharField("Medication Name", max_length=200, choices=MEDICATION_OPTIONS, blank=False)
     dosage = models.IntegerField("Dosage", blank=False)
     takenDaily = models.BooleanField("Taken Daily?", default=False)
-    startDate = models.DateField("Starting Date", blank=False, null=False)
-    endDate = models.DateField("Ending Date", blank=False, null=False)
+    startDate = models.DateField("Starting Date", blank=True, null=True)
+    endDate = models.DateField("Ending Date", blank=True, null = True)
 
     class Meta:
         verbose_name = "Medication"

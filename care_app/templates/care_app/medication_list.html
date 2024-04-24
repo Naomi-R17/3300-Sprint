@@ -1,0 +1,33 @@
+{% extends "care_app/base_template.html" %}
+
+{% block content %}
+    <!-- Medication List -->
+    <div class="container-fluid">
+        <h1 class="text-center" style="font-family: 'Monaco', monospace;">{{ patient.name }}'s Medication List</h1>
+        <div style="margin-top: 50px;">
+        <div class="row">
+            <div class="col">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Medication Name</th>
+                            <th>Dosage</th>
+                            <th>Start Date</th>
+                            <th>End Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for medication in medications %}
+                            <tr>
+                                <td>{{ medication.name }}</td>
+                                <td>{{ medication.dosage }}</td>
+                                <td>{{ medication.startDate|date:"m/d/Y" }}</td>
+                                <td>{{ medication.endDate|date:"m/d/Y" }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}

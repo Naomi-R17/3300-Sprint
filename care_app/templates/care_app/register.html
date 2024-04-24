@@ -1,0 +1,10 @@
+{% extends "care_app/base_template.html" %}
+
+{% block content %}
+<h1 class="text-center" style="font-family: 'Monaco', monospace; margin-left: 190px; margin-bottom: 40px;">Register</h1>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Register</button>
+</form>
+{% endblock %}

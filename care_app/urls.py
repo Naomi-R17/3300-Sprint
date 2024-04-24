@@ -16,6 +16,15 @@ urlpatterns = [
     path('patient/create/', PatientCreateView.as_view(), name='patient-create'),
     path('patient/<int:pk>/update/', PatientUpdateView.as_view(), name='patient-update'),
     path('patient/<int:pk>/delete/', views.PatientDeleteView.as_view(), name='patient-delete'),
+
+    # Medication List
+    path('patient/<int:patient_id>/medications/', views.medication_list, name='medication-list'),
+
+    # Register
+    path('register/', views.register, name='register'),
+    path('login/', views.login_view, name='login'),
+    path('logout/', views.logout_view, name='logout'),
+
 ]
 
 if settings.DEBUG:
