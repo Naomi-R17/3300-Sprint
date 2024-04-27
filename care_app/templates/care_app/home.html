@@ -9,9 +9,12 @@
         <img src="{% static 'images/Care-A-Lot Logo.png' %}" class="img-fluid" alt="Centered image" style="max-width: 300px; margin-left: 210px;">
     </div>
     {% if patients %}
+    <div class="row">
+            <div class="w-100"></div>
+        </div>
     <div class="row justify-content-center">
         {% for patient in patients %}
-        <div class="col-md-3 text-center">
+        <div class="col-sm-3 text-center">
             <div style="margin-bottom: 20px; margin-left:60px;">
                 {% if patient.profile_picture %}
                 <a href="{% url 'patient-detail' patient.id %}">
@@ -25,6 +28,7 @@
                 {% endif %}
                 <p style="font-family: 'Monaco', monospace; margin-top: 10px;">{{ patient.name }}</p>
             </div>
+
         </div>
         {% endfor %}
     </div>

@@ -1,4 +1,4 @@
-from django.contrib.auth.models import User, AbstractBaseUser, BaseUserManager, PermissionsMixin
+from django.contrib.auth.models import AbstractUser, Permission
 from django.db import models
 from django.urls import reverse
 
@@ -96,27 +96,18 @@ class Medication(models.Model):
 
 
 # Role Based Access Control
-# class registeredUser(AbstractUser):
-#     phoneNumber = models.CharField("Phone Number", max_length=15, blank=False)
-#     profilePicture = models.ImageField("Profile Picture", upload_to='profile_pics/', blank=True, null=True)
-#
-#     def __str__(self):
-#         return self.username
+class CustomUser(AbstractUser):
+    ROLE_CHOICES = (
+        ('admin', 'Admin'),
+        ('manager', 'Manager'),
+        ('user', 'User'),
+    )
+    role = models.CharField(max_length=10, choices=ROLE_CHOICES)
+    groups = models.ManyToManyField('auth.Group', related_name='custom_user_groups')
+    admin_permissions = Permission.objects.filter(codename__in=['add_patient', 'change_patient', 'delete_patient'])
+    manager_permissions = Permission.objects.filter(codename__in=['add_patient', 'change_patient'])
+    user_permissions = models.ManyToManyField('auth.Permission', related_name='custom_user_permissions')
 
-# class Module(models.Model):
-#     name = models.CharField(max_length=50)
-#
-#
-# class Permission(models.Model):
-#     name = models.CharField(max_length=50)
-#     module = models.ForeignKey(Module, on_delete=models.CASCADE)
-#
-#
-# class Role(models.Model):
-#     name = models.CharField(max_length=50)
-#     permissions = models.ManyToManyField(Permission)
-#
-#
-# class UserRole(models.Model):
-#     user = models.ForeignKey(User, on_delete=models.CASCADE)
-#     role = models.ForeignKey(Role, on_delete=models.SET_NULL, null=True)
+
+
+

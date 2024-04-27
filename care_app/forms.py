@@ -1,7 +1,7 @@
 from django import forms
-from .models import Patient
+from .models import Patient, CustomUser
 from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth.models import User
+
 
 class PatientForm(forms.ModelForm):
     class Meta:
@@ -11,9 +11,15 @@ class PatientForm(forms.ModelForm):
 # Registration
 class UserRegisterForm(UserCreationForm):
     email = forms.EmailField()
+    ROLE_CHOICES = (
+        ('admin', 'Admin'),
+        ('manager', 'Manager'),
+        ('user', 'User'),
+    )
+    role = forms.ChoiceField(choices=ROLE_CHOICES)
 
     class Meta:
-        model = User
-        fields = ['username', 'email', 'password1', 'password2']
+        model = CustomUser
+        fields = ['username', 'email', 'password1', 'password2', 'role']
 
 

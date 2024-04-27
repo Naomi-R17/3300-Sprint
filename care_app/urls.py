@@ -24,6 +24,15 @@ urlpatterns = [
     path('register/', views.register, name='register'),
     path('login/', views.login_view, name='login'),
     path('logout/', views.logout_view, name='logout'),
+    path('accounts/profile/', views.profile, name='profile'),
+
+    # User Authentication
+    path('admin/', views.admin_view, name='admin'),
+    path('manager/', views.manager_view, name='manager'),
+    path('user/', views.user_view, name='user'),
+    path('admin/dashboard/', views.admin_dashboard, name='admin_dashboard'),
+    path('manager/dashboard/', views.manager_dashboard, name='manager_dashboard'),
+    path('user/dashboard/', views.user_dashboard, name='user_dashboard'),
 
 ]
 
